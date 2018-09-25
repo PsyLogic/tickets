@@ -1,0 +1,44 @@
+build_settings:
+    clone_depth: 1
+    verbose: false
+    ignore:
+        - "bootstrap"
+        - "database"
+        - "node_modules"
+        - "public"
+        - "resources"
+        - "storage"
+        - "tests"
+        - "vendor"
+        - "create-release"
+
+    mysql:
+        host: "localhost"
+        user: "root"
+        pass: ""
+
+setup:
+    mysql:
+        - "DROP DATABASE IF EXISTS test;"
+        - "CREATE DATABASE test;"
+        - "GRANT ALL PRIVILEGES ON test.* TO test@'localhost' IDENTIFIED BY 'test';"
+    composer:
+        action: "install"
+
+test:
+    php_unit:
+        config:
+            - "phpunit.xml"
+        directory:
+            - "tests/"
+    php_mess_detector:
+        ignore: "vendor"
+        allow_failures: true
+    php_code_sniffer:
+        standard: "PSR4"
+    php_cpd:
+        allow_failures: true
+
+complete:
+    mysql:
+        - "DROP DATABASE IF EXISTS test;"
