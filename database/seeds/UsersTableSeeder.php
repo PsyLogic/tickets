@@ -11,14 +11,15 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')
-            ->delete();
+        // DB::table('users')
+        //     ->delete();
         $admin = new App\User();
         $admin->email = 'admin@example.com';
         $admin->name = 'Admin';
         $admin->password = Hash::make('123456');
         $admin->user_type = 'admin';
         $admin->save();
+
         //for ($i = 0; $i < 5; $i++) {
         //    $admin = new App\User();
         //    $admin->email = 'admin' . $i . '@example.com';
